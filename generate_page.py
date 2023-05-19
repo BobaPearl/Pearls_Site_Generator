@@ -133,37 +133,50 @@ def generate_html(front_matter, site_info, image_folder='assets'):
                 f.write(f'<h1>Chapter: {chapter}</h1>\n')
                 f.write(f'<h2>Page: {page}</h2>\n')
                 f.write(f'<h2>Title: {title}</h2>\n')
-                f.write('<div class="writeNav">\n')
-                f.write(generate_navigation(page_number, max_page_key))
-                f.write('</div>\n')
-                f.write('<div class="comicPage">\n')
+                
+                if metadata.get('noteaspage', 'false') == 'true':
+                    f.write('<div class="writeNav">\n')
+                    f.write(generate_navigation(page_number, max_page_key))
+                    f.write('</div>\n')
+                    f.write('<div class="comicPage">\n')
+                    f.write(author_notes_html)
+                    f.write('</div>\n')
+                    f.write('<div class="writeNav">\n')
+                    f.write(generate_navigation(page_number, max_page_key))
+                    f.write('</div>\n')
+                    f.write('</body>\n')
+                else:
+                    f.write('<div class="writeNav">\n')
+                    f.write(generate_navigation(page_number, max_page_key))
+                    f.write('</div>\n')
+                    f.write('<div class="comicPage">\n')
 
-                matching_files = glob.glob(os.path.join(image_folder, f"{file_prefix}*.*"))
-                for img_path in matching_files:
-                    _, file_ext = os.path.splitext(img_path)
-                    if file_ext == '.mp4':
-                        f.write(f'<video src="{img_path}" controls>\n')
-                        f.write(f'Your browser does not support the video tag.\n')
-                        f.write(f'</video><br>\n')
-                    else:
-                        img_alt = metadata['desc']
-                        f.write(f'<img src="{img_path}" alt="{img_alt}"><br>\n')
+                    matching_files = glob.glob(os.path.join(image_folder, f"{file_prefix}*.*"))
+                    for img_path in matching_files:
+                        _, file_ext = os.path.splitext(img_path)
+                        if file_ext == '.mp4':
+                            f.write(f'<video src="{img_path}" controls>\n')
+                            f.write(f'Your browser does not support the video tag.\n')
+                            f.write(f'</video><br>\n')
+                        else:
+                            img_alt = metadata['desc']
+                            f.write(f'<img src="{img_path}" alt="{img_alt}"><br>\n')
 
-                f.write('</div>\n')
+                    f.write('</div>\n')
 
-                f.write('<div class="writeNav">\n')
-                f.write(generate_navigation(page_number, max_page_key))
-                f.write('</div>\n')
+                    f.write('<div class="writeNav">\n')
+                    f.write(generate_navigation(page_number, max_page_key))
+                    f.write('</div>\n')
 
-                f.write('<h1>Author\'s Notes</h1>\n')
-                # Add custom HTML if the current page has a matching key in custom_html_data
-                if str(page_number) in custom_html_data:
-                    f.write(custom_html_data[str(page_number)]['html'])
+                    f.write('<h1>Author\'s Notes</h1>\n')
+                    # Add custom HTML if the current page has a matching key in custom_html_data
+                    if str(page_number) in custom_html_data:
+                        f.write(custom_html_data[str(page_number)]['html'])
 
-                f.write('<div class="authorNotes">\n')
-                f.write(f'{author_notes_html}\n')
-                f.write('</div>\n')
-                f.write('</body>\n')
+                    f.write('<div class="authorNotes">\n')
+                    f.write(f'{author_notes_html}\n')
+                    f.write('</div>\n')
+                    f.write('</body>\n')
 
 
         except Exception as e:

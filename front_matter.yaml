@@ -338,6 +338,7 @@
     date: 'Sat, 25 May 2023 00:00:01 -0700'
     Chapter: 'Blog Post'
     page: 'Art Blog'
+    noteaspage: 'true'
     note: '|So with me taking a week off, I decided to take that time to really nail down what I didn''t like about my art, and honestly, it was not just the eyes, but a fundamental misunderstanding of symbol language. If you don''t like hearing someone talk about their art process, then this will be insanely boring, so check in on Thursday next week. This was all derived from my adventure with what I really thought the problem was, and that''s the eye. Look at this collage.
 
 
@@ -360,6 +361,8 @@
 
 
         You can actually make any shape into an eye, you can make random scribbles into an eye if you understand the basic facts.
+
+        
         ![eyes2](/assets/blog/eyes2.png)
 
 
